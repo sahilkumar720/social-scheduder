@@ -4,8 +4,11 @@
 @theme {
     --color-bg: #ffffff;
     --color-text: #2a1d1a;
-    --color-brand: #4a2d26;
+    --color-brand: #56372f;
     --color-accent: #6e4037;
+    --color-hover: #3d261f;
+    --color-light-back: #f9f6f4;
+    --color-border1: #bda9a4;
     --font-sans: "Outfit", sans-serif;
     --font-serif: "Urbanist", sans-serif;
 }

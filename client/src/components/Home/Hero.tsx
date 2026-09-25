@@ -26,10 +26,10 @@ export default function Hero() {
                         </p>
 
                         <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
-                            <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#4a2d26] px-8 py-3.5 text-[15px] font-medium text-white shadow-[0_18px_35px_rgba(74,45,38,0.22)] transition hover:bg-[#3d261f]">
+                            <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#56372f] px-8 py-3.5  text-[15px] font-medium text-white shadow-[0_18px_35px_rgba(74,45,38,0.22)] transition hover:bg-[#3d261f]">
                                 Start for free <ArrowRightIcon className="size-4" />
                             </Link>
-                            <a href="#how-it-works" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#e9dbd6] bg-white px-8 py-3.5 text-[15px] font-medium text-[#4a2d26] backdrop-blur transition hover:border-[#d9c5bf] hover:bg-[#f9f6f4]">
+                            <a href="#how-it-works" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#e9dbd6] bg-white px-8 py-3.5 text-[15px] font-medium text-[#4a2d26] backdrop-blur transition hover:border-[#d9c5bf] hover:bg-light-back">
                                 See how it works
                             </a>
                         </div>

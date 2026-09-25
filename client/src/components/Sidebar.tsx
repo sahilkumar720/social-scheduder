@@ -49,13 +49,13 @@ const navItems = [
                 to={item.path}
                 end={item.path === "/dashboard"}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-all duration-150 border ${isActive ? "bg-amber-50 text-amber-900 border-amber-100" : "text-slate-500 hover:bg-slate-50 border-transparent hover:text-sl7ate-700"}`}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-all duration-150 border ${isActive ? "bg-light-back text-brand border-border1" : "text-slate-500 hover:bg-slate-50 border-transparent hover:text-sl7ate-700"}`}
                     >
 
-                <item.icon className={`size-4.5 shrink-0 ${isActive ? "text-amber-900" : "text-slate-500"}`}/>
+                <item.icon className={`size-4.5 shrink-0 ${isActive ? "text-brand" : "text-slate-500"}`}/>
                 {item.name}
                 {
-                    isActive && <span className ="ml-auto w-[5px] h-5 rounded-full bg-amber-900"/>
+                    isActive && <span className ="ml-auto w-[5px] h-5 rounded-full bg-brand"/>
                 }
             </NavLink>
         )

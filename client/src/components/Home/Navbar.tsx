@@ -8,9 +8,9 @@ export default function Navbar() {
         <nav className="sticky top-0 z-50 border-b border-[#efe1db] bg-white/85 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
                 <Link to="/" onClick={() => scrollTo(0, 0)} className="flex items-center gap-2">
-                    <div className="flex size-8 items-center justify-center rounded-xl bg-[#4a2d26] text-sm font-bold text-white shadow-[0_10px_30px_rgba(74,45,38,0.2)]">
-                        S
-                    </div>
+                    <div >
+                    <img src="/logo.svg" className="w-9 h-9"/>
+                   </div>
                     <span className="font-serif text-xl font-medium text-[#3d261f] lg:text-2xl">Socialflow</span>
                 </Link>
 

@@ -13,9 +13,9 @@ export default function Footer() {
                 <div className="mb-16 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5">
                     <div className="lg:col-span-2">
                         <Link to="/" onClick={() => scrollTo(0, 0)} className="mb-5 inline-flex items-center gap-2">
-                            <div className="flex size-7 items-center justify-center rounded-lg bg-[#4a2d26] text-sm font-bold text-white">
-                                S
-                            </div>
+                            <div >
+                    <img src="/logo.svg" className="w-9 h-9"/>
+                   </div>
                             <span className="font-medium font-serif text-xl text-[#2d201d]">Socialflow</span>
                         </Link>
                         <p className="max-w-xs text-sm leading-relaxed text-[#5a3a34]">

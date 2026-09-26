@@ -16,9 +16,9 @@ const location = useLocation();
 
 const navItems = [
     {name: "Dashboard", icon: LayoutDashboardIcon, path: "/dashboard"},
-    {name: "Post Scheduler", icon: CalendarDaysIcon, path: "/scheduler"},
-    {name: "AI Composer", icon: Wand2Icon, path: "/ai-composer"},
     {name: "Accounts", icon: UserIcon, path: "/account"},
+    {name: "Scheduler", icon: CalendarDaysIcon, path: "/scheduler"},
+    {name: "AI Composer", icon: Wand2Icon, path: "/ai-composer"},
 ]
 
   return (
@@ -27,7 +27,7 @@ const navItems = [
 {/* logo */}
 <div className="p-6 pb-4">
     <div className = "text-xl tracking-tight text-slate-800 flex items-center gap-1.5">
-        <img src="/logo.svg" alt="Logo" className="size-6"/>Scheduler
+        <img src="/logo.svg" alt="Logo" className="size-8"/>Scheduler
      </div>
 
 </div>

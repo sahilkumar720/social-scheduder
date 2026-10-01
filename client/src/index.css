@@ -14,14 +14,19 @@
 }
 
 * {
+  
     box-sizing: border-box;
 }
 
 html {
+   
     scroll-behavior: smooth;
 }
 
 body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
     margin: 0;
     background: #ffffff;
     color: var(--color-text);
@@ -32,6 +37,12 @@ body {
 
 button {
     cursor: pointer;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
 }
 
 ::selection {

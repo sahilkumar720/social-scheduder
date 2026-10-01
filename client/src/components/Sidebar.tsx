@@ -1,22 +1,18 @@
 import { Wand2Icon, UserIcon, CalendarDaysIcon, LayoutDashboardIcon, LogOutIcon, } from "lucide-react"
 import { useLocation } from "react-router-dom"
 import { NavLink } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
 const Sidebar = ({isOpen, setIsOpen} : {isOpen: boolean, setIsOpen: (val:boolean)=>void}) => {
 
-const {logout, user} = {
-    logout: ()=>{
-        window.location.href = "/";
-    },
-    user: {name: "John Doe", email: "john.doe@example.com"}
-}
+const {logout, user} = useAuth();
 
 
 const location = useLocation();
 
 const navItems = [
     {name: "Dashboard", icon: LayoutDashboardIcon, path: "/dashboard"},
-    {name: "Accounts", icon: UserIcon, path: "/account"},
+    {name: "Accounts", icon: UserIcon, path: "/accounts"},
     {name: "Scheduler", icon: CalendarDaysIcon, path: "/scheduler"},
     {name: "AI Composer", icon: Wand2Icon, path: "/ai-composer"},
 ]
@@ -81,7 +77,7 @@ const navItems = [
         </div>
 
     </div>
-    <button className="mt-1 flex items-center gap-2 px-3 py-2 w-full rounded text-sm text-slate-500 hover:bg-amber-50 hover:border-amber-100 transition-all duration-150">
+    <button onClick={logout} className="mt-1 flex items-center gap-2 px-3 py-2 w-full rounded text-sm text-slate-500 hover:bg-amber-50 hover:border-amber-100 transition-all duration-150">
         <LogOutIcon className="size-4"/>
         Sign out
     </button>

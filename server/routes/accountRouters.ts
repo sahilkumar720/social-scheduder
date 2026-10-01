@@ -7,7 +7,7 @@ const accountRouter = express.Router();
 
 accountRouter.get('/', protect, getAccounts);
 accountRouter.post('/', protect, addAccount);
-accountRouter.get('/:id', protect, disconnectAccount);
+accountRouter.delete('/:id', protect, disconnectAccount);
 
 
 export default accountRouter;

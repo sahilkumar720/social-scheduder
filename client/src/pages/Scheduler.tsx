@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
-import { dummyPostsData, PLATFORMS } from "../assets/assets";
+import { PLATFORMS } from "../assets/assets";
 import { ArrowRightIcon, CalendarDaysIcon, CalendarIcon, ClockIcon, SendIcon, XIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import api from "../api/axios";
 
 
 const Scheduler = () => {
@@ -15,12 +17,19 @@ const Scheduler = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchPosts = async () =>{
-    setPosts(dummyPostsData)
+   
+    try{
+      const {data} = await api.get("/api/posts")
+      setPosts(data)
+    }catch(error: any){
+      toast.error(error?.response?.data?.message || error.message);
+    }
+
   }
 
 useEffect(()=>{
   (async ()=> await fetchPosts())();
-  const interval = setInterval(async ()=> await fetchPosts(), 1000);
+  const interval = setInterval(async ()=> await fetchPosts(), 10000);
   return ()=> clearInterval(interval)
 },[])
 
@@ -33,11 +42,50 @@ const togglePlatform = (id: string) => setSelectedPlatforms((prev)=> (prev.inclu
 
 const handleSchedule = async (e: React.FormEvent) => {
   e.preventDefault()
+  if(selectedPlatforms.length === 0){
+    toast.error("Select at least one platform");
+    return;
+  }
+  if(!scheduledDate || !scheduledTime){
+    toast.error("Select data and time");
+    return;
+  }
+  if(selectedPlatforms.includes('instagram') && !mediaFile){
+    toast.error("Instagram requires an image or video");
+    return;
+  }
+const scheduledDateTime = new Date(`${scheduledDate}T${scheduledTime}`);
+  if (Number.isNaN(scheduledDateTime.getTime())) {
+  toast.error("Please select a valid date and time");
+  return;
+}
+
+const scheduledFor = scheduledDateTime.toISOString();
+// ...existing code...
+  const formDate = new FormData();
+  formDate.append("content", content);
+  formDate.append("scheduledFor", scheduledFor);
+  formDate.append("status", "scheduled");
+  formDate.append("platforms", JSON.stringify(selectedPlatforms));
+  if(mediaFile) formDate.append("media", mediaFile);
+
   setLoading(true)
-  setTimeout(()=>{
-    setLoading(false)
-    setPosts((prev)=> [...prev, dummyPostsData[0]])
-  }, 1000)
+  try{
+    await api.post("/api/posts", formDate, {headers: {"Content-Type": "multipart/form-data"}})
+    toast.success("Post scheduled!");
+    setContent("");
+    setScheduledDate("");
+    setScheduledTime("");
+    setSelectedPlatforms([]);
+    setMediaFile(null);
+    fetchPosts();
+
+  }catch(error: any){
+    toast.error(error?.response?.data?.message || error.message)
+  }finally{
+    setLoading(false);
+  }
+
 }
 
   
@@ -148,12 +196,17 @@ Platform
 
           {/* submit  */}
 
-          <button type="submit" disabled={loading} className="w-full flex items-center justify-center gap-2 py-3.5 bg-brand hover:bg-hover transition-all text-white rounded-lg">
-            {loading ? (
+          <button 
+          type="submit" 
+       
+          disabled={loading} 
+          className="w-full flex items-center justify-center gap-2 py-3.5 bg-brand hover:bg-hover transition-all text-white rounded-lg">
+          
+          {loading ? (
               <>
-              <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin">
+              <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin"/>
                 Scheduling...
-              </div>
+              
               </>
             ) : (
             <>
@@ -229,7 +282,7 @@ Platform
 
       </div>
       <div className="max-h-72 overflow-y-auto divide-y divide-slate-50">
-        {scheduled.length === 0 ? (
+        {published.length === 0 ? (
 
          <div className="py-10 text-center text-slate-400 text-sm">No published posts scheduled yet
 

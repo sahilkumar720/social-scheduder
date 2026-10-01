@@ -1,6 +1,9 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MailIcon, LockIcon, ArrowRightIcon, User2Icon } from "lucide-react";
+import { useAuth } from "../context/AuthContext"
+import api from "../api/axios";
+import toast from "react-hot-toast";
 
 export default function Login() {
     const [loginState, setLoginState] = useState(true);
@@ -9,15 +12,29 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const {login, user} = useAuth()
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            navigate("/dashboard");
-        }, 1000);
-    };
+   const handleSubmit = async (e: React.FormEvent)=>{
+    e.preventDefault();
+    setLoading(true);
+    try {
+        const {data} = await api.post(`/api/auth/${loginState  ? "login" : "register"}`, {name, email, password})
+
+        login(data, data.token)
+        navigate("/dashboard")
+    } catch (error: any) {
+        toast.error(error.response?.data?.message || error?.message)
+    }
+    finally{
+        setLoading(false)
+    }
+   };
+
+   useEffect(()=>{
+    if(user) navigate('/dashboard')
+   },[user])
+
+   
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,#f8f3f1_0%,#ffffff_45%,#f7f3f1_100%)] p-4">
